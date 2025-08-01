@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:notepad_ocean/screens/initial_screen.dart';
+import 'package:notepad_ocean/screens/initialScreen.dart';
 
 void main() {
   runApp(const MyApp());

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:notepad_ocean/screens/new_screen.dart';
+import 'package:notepad_ocean/screens/newScreen.dart';
 
 class InitialScreen extends StatelessWidget {
   const InitialScreen({super.key});
@@ -37,12 +37,14 @@ class InitialScreen extends StatelessWidget {
               onPressed: () {
                 Navigator.push(
                   context,
-                  MaterialPageRoute(
-                    builder: (context) => const NewNote(),
-                  ),
+                  MaterialPageRoute(builder: (context) => const NewNote()),
                 );
               },
-              style: ElevatedButton.styleFrom(fixedSize: Size(120, 80)),
+              style: ElevatedButton.styleFrom(
+                fixedSize: Size(100, 70),
+                elevation: 20,
+                side: BorderSide(color: Colors.blueGrey, width: 1)
+              ),
               child: Icon(Icons.add, size: 40, color: Colors.black),
             ),
           ),
