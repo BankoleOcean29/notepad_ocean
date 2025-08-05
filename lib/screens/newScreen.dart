@@ -11,6 +11,15 @@ class NewNote extends StatefulWidget {
 }
 
 class _NewNoteState extends State<NewNote> {
+
+  Color _backgroundColor = Color(0xffFFF3E0);
+
+  void _changeBackground(Color newColor) {
+    setState(() {
+      _backgroundColor = newColor;
+    });
+  }
+
   Note note = Note(title: "title", content: " ");
 
   final TextEditingController _titleController = TextEditingController();
@@ -75,14 +84,11 @@ class _NewNoteState extends State<NewNote> {
     return SafeArea(
         child:
           Scaffold(
-            backgroundColor: Color(0xffFFF3E0),
+            resizeToAvoidBottomInset: true,
+            backgroundColor: _backgroundColor,
             body: SingleChildScrollView(
-              padding: EdgeInsets.fromLTRB(
-                16.0,
-                16.0,
-                16.0,
-                // Add space for the bottom bar when it's visible, plus keyboard height.
-                _isContentFieldFocused ? keyboardHeight + bottomBarHeight : bottomBarHeight,
+              padding: EdgeInsets.only(
+                bottom: MediaQuery.of(context).viewInsets.bottom + 60,
               ),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -105,11 +111,13 @@ class _NewNoteState extends State<NewNote> {
                           height: 35,
                           width: 200,
                           child: TextField(
+                            maxLines: 1,
+                            textInputAction: TextInputAction.done,
                             decoration: InputDecoration(
                               hintText: "Note title",
                               border: InputBorder.none,
                               hintStyle: TextStyle(
-                                fontSize: 20,
+                                fontSize: 17,
                                 fontWeight: FontWeight.w600,
                                 color: Colors.grey,
                               ),
@@ -145,12 +153,51 @@ class _NewNoteState extends State<NewNote> {
                 ],
               ),
             ),
-            bottomNavigationBar: BottomAppBar(
-              child: Row(
-                children: [
-                  SizedBox(width: 100,),
-                  ElevatedButton(onPressed: (){}, child: Text("Save"))
-                ],
+            bottomNavigationBar: Padding(
+              padding: EdgeInsets.only(bottom: MediaQuery.of(context).viewInsets.bottom,),
+              child: BottomAppBar(
+                color: Colors.blueGrey,
+                child: Row(
+                  children: [
+                    GestureDetector(
+                      onTap: () => _changeBackground(Color(0xffE3F2FD)),
+                      child: Container(
+                        height: 45,
+                        width: 45,
+                        decoration: BoxDecoration(
+                          shape: BoxShape.circle,
+                            color: Color(0xffE3F2FD),
+                        ),
+                      ),
+                    ),
+                    SizedBox(width: 20,),
+                    GestureDetector(
+                      onTap: () => _changeBackground(Color(0xffFBE9E7)),
+                      child: Container(
+                        height: 45,
+                        width: 45,
+                        decoration: BoxDecoration(
+                          shape: BoxShape.circle,
+                          color: Color(0xffFBE9E7),
+                        ),
+                      ),
+                    ),
+                    SizedBox(width: 20,),
+                    GestureDetector(
+                      onTap: () => _changeBackground(Color(0xffC5E1A5)),
+                      child: Container(
+                        height: 45,
+                        width: 45,
+                        decoration: BoxDecoration(
+                          shape: BoxShape.circle,
+                          color: Color(0xffC5E1A5),
+                        ),
+                      ),
+                    ),
+                    SizedBox(width: 70,),
+                    ElevatedButton(onPressed: (){}, child: Text("Save"))
+                  ],
+                ),
               ),
             ),
           ),
